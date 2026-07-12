@@ -1,4 +1,4 @@
-# Lex Process Researcher v0.2
+# Lex Process Researcher v0.3
 
 Serviço de pesquisa auxiliar de processos públicos para o ecossistema HomoSapiens/Lex.
 
@@ -28,6 +28,7 @@ A API ficará em `http://localhost:8080`.
 - `GET /ready`
 - `GET /v1/sources`
 - `GET /v1/status-matrix`
+- `GET /v1/compliance`
 - `POST /v1/processes/search`
 - `GET /v1/processes/{numero_cnj}?tribunal=tjsc`
 - `GET /v1/processes/{numero_cnj}/timeline?tribunal=tjsc`
@@ -46,3 +47,8 @@ A API ficará em `http://localhost:8080`.
 ## Limite jurídico
 
 A resposta é pesquisa auxiliar. A conferência final é humana e a ausência de resultado não prova inexistência do processo.
+
+
+## Conformidade
+
+O serviço limita a saída para o CNJ a 100 requisições por minuto por instância, exclui registros sigilosos e exige revisão humana. O limite distribuído deve ser aplicado no gateway antes de escalar réplicas.
