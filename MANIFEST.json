@@ -1,0 +1,14 @@
+{
+  "project": "lex-process-researcher",
+  "version": "0.3.0",
+  "canonical_file": "CANONICO.md",
+  "inventory_file": "inventory/inventory.v0.3.0.json",
+  "status_file": "inventory/status-matrix.v0.3.0.json",
+  "generated_at": "2026-07-11T21:06:44-03:00",
+  "sha256": {
+    "inventory": "7f8a85cd20008039e95fa30eeb058fbd0f76116f325e93ae9ad549922d931e34",
+    "status_matrix": "53f0d194fb2a2f6eb351331f7ca00172741faf0b9c6da5b168696cf58416d57a"
+  },
+  "external_write": true,
+  "deploy_executed": false
+}
