@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0",
+  "project": "lex-process-researcher",
+  "version": "0.3.0",
+  "generated_at": "2026-07-11T21:06:44-03:00",
+  "repository": "milenapsa/lex-process-researcher",
+  "target_runtime": "HomoSapiens/Lex",
+  "execution_state": {
+    "repository_created": true,
+    "canonical_written": true,
+    "inventory_written": false,
+    "json_written": false,
+    "runtime_integrated": false,
+    "deploy_executed": false
+  },
+  "sources": {
+    "datajud": {
+      "official": true,
+      "automated_target": true,
+      "alias_count": 91,
+      "groups": {
+        "superior": [
+          "tst",
+          "tse",
+          "stj",
+          "stm"
+        ],
+        "federal": [
+          "trf1",
+          "trf2",
+          "trf3",
+          "trf4",
+          "trf5",
+          "trf6"
+        ],
+        "state": [
+          "tjac",
+          "tjal",
+          "tjam",
+          "tjap",
+          "tjba",
+          "tjce",
+          "tjdft",
+          "tjes",
+          "tjgo",
+          "tjma",
+          "tjmg",
+          "tjms",
+          "tjmt",
+          "tjpa",
+          "tjpb",
+          "tjpe",
+          "tjpi",
+          "tjpr",
+          "tjrj",
+          "tjrn",
+          "tjro",
+          "tjrr",
+          "tjrs",
+          "tjsc",
+          "tjse",
+          "tjsp",
+          "tjto"
+        ],
+        "labor": [
+          "trt1",
+          "trt2",
+          "trt3",
+          "trt4",
+          "trt5",
+          "trt6",
+          "trt7",
+          "trt8",
+          "trt9",
+          "trt10",
+          "trt11",
+          "trt12",
+          "trt13",
+          "trt14",
+          "trt15",
+          "trt16",
+          "trt17",
+          "trt18",
+          "trt19",
+          "trt20",
+          "trt21",
+          "trt22",
+          "trt23",
+          "trt24"
+        ],
+        "electoral": [
+          "tre-ac",
+          "tre-al",
+          "tre-am",
+          "tre-ap",
+          "tre-ba",
+          "tre-ce",
+          "tre-dft",
+          "tre-es",
+          "tre-go",
+          "tre-ma",
+          "tre-mg",
+          "tre-ms",
+          "tre-mt",
+          "tre-pa",
+          "tre-pb",
+          "tre-pe",
+          "tre-pi",
+          "tre-pr",
+          "tre-rj",
+          "tre-rn",
+          "tre-ro",
+          "tre-rr",
+          "tre-rs",
+          "tre-sc",
+          "tre-se",
+          "tre-sp",
+          "tre-to"
+        ],
+        "military_state": [
+          "tjmmg",
+          "tjmrs",
+          "tjmsp"
+        ]
+      },
+      "status": "mapped_not_runtime_verified",
+      "secret_policy": "environment_or_official_public_key_discovery; never commit or log"
+    },
+    "tjsc_eproc": {
+      "official": true,
+      "automation": "manual_official",
+      "status": "manual_required",
+      "reason": "portal completo sujeito a controles próprios; sem bypass de CAPTCHA, login, 2FA ou certificado"
+    },
+    "jurisprudence": {
+      "official": true,
+      "automation": "hybrid_progressive",
+      "status": "expansion",
+      "accepted_modes": [
+        "official_api",
+        "official_dataset",
+        "official_curated_page",
+        "manual_official"
+      ],
+      "prohibited": [
+        "captcha_bypass",
+        "credential_automation",
+        "scraping_against_policy"
+      ]
+    }
+  },
+  "api_contract": {
+    "routes": [
+      "GET /health",
+      "GET /ready",
+      "GET /v1/sources",
+      "GET /v1/status-matrix",
+      "POST /v1/processes/search",
+      "GET /v1/processes/{numero_cnj}",
+      "GET /v1/processes/{numero_cnj}/timeline",
+      "POST /v1/jurisprudence/search",
+      "GET /v1/validate-cnj/{numero_cnj}"
+    ],
+    "response_states": [
+      "found",
+      "not_found",
+      "manual_required",
+      "source_unavailable",
+      "not_configured",
+      "invalid_input",
+      "rate_limited"
+    ],
+    "human_review_required": true
+  },
+  "governance": {
+    "risk_floor": "R4",
+    "autonomy": {
+      "A0": "analysis/documentation",
+      "A1": "read/health/inventory",
+      "A2": "dry-run/tests/preview",
+      "A3": "reversible repository writes and controlled integration",
+      "A4": "deploy/production/VPS/Docker/DNS"
+    },
+    "prohibitions": [
+      "protocol or petition filing",
+      "access to sealed cases",
+      "credential or certificate automation",
+      "CAPTCHA bypass",
+      "automatic legal conclusion",
+      "claim of production execution without technical evidence"
+    ]
+  },
+  "next_gates": [
+    "complete repository source code",
+    "run unit tests",
+    "verify DataJud official endpoint behavior",
+    "integrate behind Lex gateway",
+    "snapshot runtime",
+    "canary deploy",
+    "post-deploy health checks",
+    "rollback if degraded"
+  ]
+}
