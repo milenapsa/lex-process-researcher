@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-11T21:06:44-03:00",
+  "items": [
+    {
+      "id": "tjsc-eproc-full",
+      "label": "Portal completo TJSC/eproc",
+      "mode": "manual_official",
+      "status": "manual_required",
+      "runtime_active": false
+    },
+    {
+      "id": "tjsc-datajud",
+      "label": "Metadados processuais TJSC via DataJud",
+      "mode": "official_api",
+      "status": "mapped_pending_runtime_verification",
+      "runtime_active": false
+    },
+    {
+      "id": "other-26-state-courts",
+      "label": "Demais 26 TJs via DataJud",
+      "mode": "official_api",
+      "status": "mapped_pending_runtime_verification",
+      "runtime_active": false
+    },
+    {
+      "id": "all-datajud-aliases",
+      "label": "91 aliases oficiais DataJud",
+      "mode": "official_api",
+      "status": "inventoried",
+      "runtime_active": false
+    },
+    {
+      "id": "full-state-jurisprudence",
+      "label": "Jurisprudência integral de todos os TJs",
+      "mode": "hybrid_progressive",
+      "status": "expansion",
+      "runtime_active": false
+    }
+  ]
+}
