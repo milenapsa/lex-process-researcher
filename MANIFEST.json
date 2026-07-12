@@ -1,14 +1,33 @@
 {
-  "project": "lex-process-researcher",
+  "name": "lex-process-researcher",
   "version": "0.3.0",
-  "canonical_file": "CANONICO.md",
-  "inventory_file": "inventory/inventory.v0.3.0.json",
-  "status_file": "inventory/status-matrix.v0.3.0.json",
-  "generated_at": "2026-07-11T21:06:44-03:00",
-  "sha256": {
-    "inventory": "7f8a85cd20008039e95fa30eeb058fbd0f76116f325e93ae9ad549922d931e34",
-    "status_matrix": "53f0d194fb2a2f6eb351331f7ca00172741faf0b9c6da5b168696cf58416d57a"
+  "generated_at": "2026-07-11",
+  "mode": "github_source_ready",
+  "external_write_planned": true,
+  "deploy_executed": false,
+  "secrets_included": false,
+  "features": [
+    "91_official_datajud_aliases",
+    "cnj_terms_compliance",
+    "datajud_public_key_auto_discovery",
+    "distributed_limit_required",
+    "local_rate_limit_100_rpm",
+    "manual_official_fallback",
+    "process_timeline",
+    "sealed_case_filter",
+    "state_court_inference",
+    "status_matrix"
+  ],
+  "tests_local": {
+    "passed": true,
+    "count": 9,
+    "command": "python -m pytest -q"
   },
-  "external_write": true,
-  "deploy_executed": false
+  "syntax_compile": {
+    "passed": true
+  },
+  "ruff_local": {
+    "passed": false,
+    "reason": "ruff_not_installed_in_runtime; CI configured"
+  }
 }
