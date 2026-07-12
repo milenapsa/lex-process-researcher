@@ -1,0 +1,33 @@
+{
+  "version": "0.3.0",
+  "timestamp": "2026-07-12T00:29:01Z",
+  "vps": {
+    "id": 1799286,
+    "hostname": "srv1799286.hstgr.cloud",
+    "state": "running",
+    "ipv4": "76.13.226.21"
+  },
+  "snapshot": {
+    "id": 297218,
+    "created_at": "2026-07-11T21:08:56Z",
+    "expires_at": "2026-07-12T21:08:56Z"
+  },
+  "canary": {
+    "project_name": "lex-process-researcher-canary",
+    "port": 18080,
+    "create_action": {
+      "id": 103753001,
+      "name": "docker_compose_up",
+      "state": "sent"
+    },
+    "verified": false,
+    "logs_available": false,
+    "error": "Docker project not found immediately after enqueue; Docker listing endpoint returned VPS:9999",
+    "correlation_ids": [
+      "a23cb4c3-82bd-4a98-bfe9-4c10dd8caa6a",
+      "a23cb4cb-1d87-4663-ba43-226ee8fcec7b"
+    ]
+  },
+  "production_promoted": false,
+  "rollback_available": true
+}
