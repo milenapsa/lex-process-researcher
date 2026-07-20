@@ -20,7 +20,7 @@ from app.services import search_process, timeline
 
 app = FastAPI(
     title="Lex Process Researcher",
-    version="0.3.0",
+    version="0.3.1",
     description=(
         "Pesquisa auxiliar de processos públicos com fontes oficiais, "
         "sem automação de sistemas restritos."
@@ -36,7 +36,7 @@ async def health() -> dict:
     return {
         "status": "ok",
         "service": "lex-process-researcher",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "secret_returned": False,
     }
 
@@ -49,6 +49,26 @@ async def ready() -> dict:
         "datajud": connector,
         "manual_official_fallback": True,
         "human_review_required": True,
+        "no_invention_policy": True,
+    }
+
+
+@app.get("/v1/datajud/health")
+async def datajud_health() -> dict:
+    connector = await datajud.health()
+    return {
+        "status": "ok" if connector["configured"] else "degraded",
+        "service": "lex-process-researcher",
+        "version": "0.3.1",
+        "source": "cnj_datajud",
+        "configured": connector["configured"],
+        "key_source": connector["key_source"],
+        "secret_returned": False,
+        "tribunals_mapped": connector["tribunals_mapped"],
+        "local_rpm_limit": connector["local_rpm_limit"],
+        "max_concurrency": connector["max_concurrency"],
+        "human_review_required": True,
+        "no_invention_policy": True,
     }
 
 
@@ -136,8 +156,37 @@ async def process_get(
     return await search_process(numero_cnj, tribunal)
 
 
-@app.get("/v1/processes/{numero_cnj}/timeline", response_model=TimelineResponse)
+@app.get(
+    "/v1/processes/{numero_cnj}/timeline",
+    response_model=TimelineResponse,
+)
 async def process_timeline(
+    numero_cnj: str,
+    tribunal: str | None = Query(default=None),
+) -> TimelineResponse:
+    return await timeline(numero_cnj, tribunal)
+
+
+@app.get(
+    "/v1/datajud/processos/{numero_cnj}",
+    response_model=SearchResponse,
+)
+async def datajud_process_get(
+    numero_cnj: str,
+    tribunal: str | None = Query(default=None),
+    size: int = Query(default=1, ge=1, le=25),
+) -> SearchResponse:
+    result = await search_process(numero_cnj, tribunal)
+    if result.records:
+        result.records = result.records[:size]
+    return result
+
+
+@app.get(
+    "/v1/datajud/processos/{numero_cnj}/timeline",
+    response_model=TimelineResponse,
+)
+async def datajud_process_timeline(
     numero_cnj: str,
     tribunal: str | None = Query(default=None),
 ) -> TimelineResponse:
