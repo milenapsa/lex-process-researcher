@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import asyncio
+import html as html_lib
 import re
 import time
 from dataclasses import dataclass
+from html.parser import HTMLParser
 from urllib.parse import urlparse
 
 import httpx
@@ -15,6 +17,19 @@ KEY_PATTERN = re.compile(
     r"Authorization\s*:\s*APIKey\s+([A-Za-z0-9_\-+/=]{20,})",
     re.IGNORECASE,
 )
+
+
+class _TextExtractor(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self._parts: list[str] = []
+
+    def handle_data(self, data: str) -> None:
+        if data:
+            self._parts.append(data)
+
+    def text(self) -> str:
+        return " ".join(self._parts)
 
 
 @dataclass(frozen=True)
@@ -32,7 +47,16 @@ class DataJudKeyProvider:
 
     @staticmethod
     def extract_key(html: str) -> str | None:
-        match = KEY_PATTERN.search(html)
+        parser = _TextExtractor()
+        try:
+            parser.feed(html)
+            parser.close()
+            text = parser.text()
+        except Exception:
+            text = html
+
+        normalized = " ".join(html_lib.unescape(text).split())
+        match = KEY_PATTERN.search(normalized)
         return match.group(1) if match else None
 
     @staticmethod
@@ -73,6 +97,7 @@ class DataJudKeyProvider:
                 async with httpx.AsyncClient(
                     timeout=settings.http_timeout_seconds,
                     follow_redirects=True,
+                    headers={"User-Agent": "Lex-Process-Researcher/0.3.2"},
                 ) as client:
                     response = await client.get(settings.datajud_key_page_url)
                     response.raise_for_status()
